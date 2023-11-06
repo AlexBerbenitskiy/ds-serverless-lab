@@ -30,6 +30,8 @@ export class RestAPIStack extends cdk.Stack {
       tableName: "MovieCast",
     });
 
+    
+
     movieCastsTable.addLocalSecondaryIndex({
       indexName: "roleIx",
       sortKey: { name: "roleName", type: dynamodb.AttributeType.STRING },
@@ -175,20 +177,20 @@ export class RestAPIStack extends cdk.Stack {
     );
 
     
+
     const movieCastEndpoint = moviesEndpoint.addResource("cast");
     movieCastEndpoint.addMethod(
       "GET",
       new apig.LambdaIntegration(getMovieCastMembersFn, { proxy: true })
     );
   
+
     movieEndpoint.addMethod(
       "DELETE",
       new apig.LambdaIntegration(deleteMovieFn, { proxy: true })
     );
 
       }
-      
-
       
     }
     
